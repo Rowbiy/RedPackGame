@@ -31,7 +31,7 @@
     // 切红包控制类
     function RedPackController(bottom, backgroundColor, zIndex, moveColor) {
         this.bottom = bottom || 0
-        this.backgroundColor = backgroundColor || 'rgba(0,0,0,.6)'
+        this.backgroundColor = backgroundColor || 'rgba(0,0,0,0.3)'
         this.zIndex = zIndex || 1
         this.moveColor = moveColor || '#fff'
         // 初始化图片DOM
@@ -66,6 +66,8 @@
             this.canvas.style.position = 'absolute'
             this.canvas.width = this.winWidth
             this.canvas.height = this.winHeight - this.bottom
+            this.canvas.left = 0
+            this.canvas.top = 0
             document.body.appendChild(this.canvas)
             this.ctx = this.canvas.getContext('2d')
             var that = this
@@ -299,7 +301,7 @@
             if (!loop) {
                 that.ctx.clearRect(0, 0, that.winWidth, that.winHeight - that.bottom)
                 setTimeout(function () {
-                    document.body.remove(that.canvas)
+                    document.body.removeChild(that.canvas)
                     typeof callback === 'function' && callback()
                 }, 20)
                 return
